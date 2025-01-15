@@ -1,12 +1,23 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+
+	"github.com/gin-gonic/gin"
+	"github.com/rpstvs/gin-go/internal/api"
+)
 
 func main() {
 	r := gin.Default()
+	token, err := api.GetToken(,)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(token)
 	r.GET("/ping", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{
-			"message": "Pong",
+			"token": token,
 		})
 	})
 
