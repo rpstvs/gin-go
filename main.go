@@ -2,14 +2,29 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"github.com/rpstvs/gin-go/internal/api"
 )
 
 func main() {
 	r := gin.Default()
-	token, err := api.GetToken(,)
+
+	err := godotenv.Load()
+
+	if err != nil {
+		log.Fatal("couldnt load .env file")
+	}
+
+	clientid := os.Getenv("CLIENT_ID")
+	client_secret := os.Getenv("CLIENT_SECRET")
+
+	token, err := api.GetToken(clientid, client_secret)
+
+	api.GetNewReleases()
 
 	if err != nil {
 		fmt.Println(err)

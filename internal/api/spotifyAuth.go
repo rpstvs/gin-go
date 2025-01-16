@@ -3,7 +3,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 )
@@ -29,7 +29,7 @@ func GetToken(clientid, clientsecret string) (string, error) {
 
 	defer resp.Body.Close()
 
-	body2, err := ioutil.ReadAll(resp.Body)
+	body2, err := io.ReadAll(resp.Body)
 
 	if err != nil {
 		return "", err
