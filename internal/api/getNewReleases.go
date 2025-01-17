@@ -1,7 +1,9 @@
 package api
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 )
 
@@ -11,7 +13,7 @@ func GetNewReleases() {
 		fmt.Println("couldnt make request")
 	}
 
-	req.Header.Add("Authorization", "")
+	req.Header.Add("Authorization", "Bearer ")
 
 	client := http.DefaultClient
 	resp, err := client.Do(req)
@@ -26,5 +28,11 @@ func GetNewReleases() {
 		fmt.Println("BAD REQUEST")
 	}
 
-	fmt.Println(resp)
+	dat, err := io.ReadAll(resp.Body)
+
+	reqResp := &Response{}
+
+	err = json.Unmarshal(dat, &reqResp)
+
+	fmt.Println(reqResp)
 }
