@@ -27,7 +27,7 @@ type Response struct {
 			ReleaseDatePrecision string `json:"release_date_precision"`
 			Type                 string `json:"type"`
 			URI                  string `json:"uri"`
-			Artists              []struct {
+			Artists              struct {
 				ExternalUrls struct {
 					Spotify string `json:"spotify"`
 				} `json:"external_urls"`

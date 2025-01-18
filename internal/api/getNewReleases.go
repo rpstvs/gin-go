@@ -34,5 +34,16 @@ func GetNewReleases() {
 
 	err = json.Unmarshal(dat, &reqResp)
 
-	fmt.Println(reqResp)
+	var newReleases []Albums
+
+	for _, items := range reqResp.Albums.Items {
+		var tmpAlbum Albums
+
+		tmpAlbum.albumName = items.Name
+		tmpAlbum.artistName = items.Artists.Name
+		tmpAlbum.releaseDate = items.ReleaseDate
+		newReleases = append(newReleases, tmpAlbum)
+	}
+	fmt.Println(newReleases)
+
 }
